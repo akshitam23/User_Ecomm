@@ -1,8 +1,10 @@
 package com.example.User_Ecomm.Service.Impl;
 
+import com.example.User_Ecomm.Controller.utilities.HashingPassword;
 import com.example.User_Ecomm.Entity.Address;
 import com.example.User_Ecomm.Entity.Users;
 import com.example.User_Ecomm.Repository.UserRepository;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,11 +15,12 @@ import java.util.List;
 @Service
 @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 public class UserServicesImpl implements UserService {
-
+      ;
 
         @Autowired
         private UserRepository userRepository;
 
+        HashingPassword hashingPassword=new HashingPassword();
         @Override
         public void add(Users user) {
             userRepository.save(user);
@@ -43,4 +46,17 @@ public class UserServicesImpl implements UserService {
         public List<Address> getAllAddress(String userId) {
                 return userRepository.findOne(userId).getAddress();
         }
+        @Override
+        public String login(String email, String password,Users users) {
+                Users pass=userRepository.findByEmail(email);
+                if(pass==null)
+                        return "Failure";
+                else{
+                if(pass.getPassword().compareTo(users.getPassword())==0)
+                        return "Success";
+                else
+                        return "Failure";}
+
+        }
+
 }

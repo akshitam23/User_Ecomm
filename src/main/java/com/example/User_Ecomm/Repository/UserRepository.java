@@ -12,6 +12,7 @@ import java.util.List;
     public interface UserRepository extends CrudRepository<Users, String> {
 
        // List<Address> findAdressByUserId(@Param("userId") String userId);
+    Users findByEmail(String email);
 
     }
 

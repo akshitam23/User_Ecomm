@@ -11,5 +11,7 @@ public interface UserService {
     void update(Users user);
     void delete(String userId);
     List<Address> getAllAddress(String userId);
+    String login(String email,String password,Users user);
+
 
 }

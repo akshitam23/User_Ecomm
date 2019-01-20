@@ -4,12 +4,14 @@ import com.example.User_Ecomm.DTO.UserDTO;
 import com.example.User_Ecomm.Entity.Address;
 import com.example.User_Ecomm.Entity.Users;
 import com.example.User_Ecomm.Service.Impl.UserService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 
 @RestController
@@ -25,6 +27,13 @@ public class UserController {
         Users user = new Users();
         BeanUtils.copyProperties(userDTO, user);
         userService.add(user);
+
+    }
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String  login(@RequestBody UserDTO userDTO) {
+        Users user = new Users();
+        BeanUtils.copyProperties(userDTO, user);
+       return userService.login(userDTO.getEmail(),userDTO.getPassword(),user);
 
     }
 
@@ -57,5 +66,6 @@ public class UserController {
 
 
     }
+
 
 }
