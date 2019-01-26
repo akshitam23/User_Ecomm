@@ -1,10 +1,9 @@
 package com.example.User_Ecomm.Service.Impl;
 
-import com.example.User_Ecomm.Controller.utilities.HashingPassword;
+import com.example.User_Ecomm.utilities.HashingPassword;
 import com.example.User_Ecomm.Entity.Address;
 import com.example.User_Ecomm.Entity.Users;
 import com.example.User_Ecomm.Repository.UserRepository;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -50,12 +49,12 @@ public class UserServicesImpl implements UserService {
         public String login(String email, String password,Users users) {
                 Users pass=userRepository.findByEmail(email);
                 if(pass==null)
-                        return "Failure";
+                        return "User Not Found";
                 else{
-                if(pass.getPassword().compareTo(users.getPassword())==0)
-                        return "Success";
+                if(pass.getPassword().equals(users.getPassword()))
+                        return pass.getUserId();
                 else
-                        return "Failure";}
+                        return "Password dont match";}
 
         }
 

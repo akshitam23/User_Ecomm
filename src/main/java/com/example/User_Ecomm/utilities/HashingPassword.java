@@ -1,4 +1,4 @@
-package com.example.User_Ecomm.Controller.utilities;
+package com.example.User_Ecomm.utilities;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
